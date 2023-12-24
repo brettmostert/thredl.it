@@ -4,7 +4,7 @@ SOURCE="${BASH_SOURCE[0]}"
 while [ -h "$SOURCE" ] ; do SOURCE="$(readlink "$SOURCE")"; done
 DIR="$( cd -P "$( dirname "$SOURCE" )/.." && pwd )"
 
-#  Change into that directory
+# Change into that directory
 cd "$DIR"
 
 if [ ! -d $DIR/bin ]; then
@@ -20,16 +20,14 @@ BIN_PATH=${BIN_PATH:=bin/${BINARY_NAME}}
 GIT_COMMIT="$(git rev-parse HEAD)"
 GIT_DIRTY="$(test -n "`git status --porcelain`" && echo "+CHANGES" || true)"
 
-# Get the build date from the latest commit since it can be used across all
-# builds
+# Get the build date from the latest commit
 function build_date() {
-  # It's tricky to do an RFC3339 format in a cross platform way, so we hardcode UTC
   : "${DATE_FORMAT:="%Y-%m-%dT%H:%M:%SZ"}"
   git show --no-show-signature -s --format=%cd --date=format:"$DATE_FORMAT" HEAD
 }
 
 BUILD_DATE=$(build_date)
-# -tags="${BUILD_TAGS}" \
+
 go build \
     -trimpath \
     -ldflags "
