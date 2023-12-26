@@ -4,7 +4,7 @@ import (
 	"time"
 
 	"github.com/alexedwards/scs/v2"
-	"github.com/brettmostert/thredl.it/server"
+	"github.com/brettmostert/thredl.it/internal/server"
 	"github.com/gorilla/mux"
 )
 

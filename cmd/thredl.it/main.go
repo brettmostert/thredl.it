@@ -6,12 +6,12 @@ import (
 	"time"
 
 	"github.com/brettmostert/thredl.it/internal/api"
+	"github.com/brettmostert/thredl.it/internal/server"
 	"github.com/brettmostert/thredl.it/internal/ui"
-	"github.com/brettmostert/thredl.it/server"
 )
 
 func main() {
-	// todo - move this to internal/cmd to keep this clean...
+	// TODO: Move this to internal/cmd to keep this clean...
 	ctx := &server.AppContext{}
 	s := server.New(ctx)
 

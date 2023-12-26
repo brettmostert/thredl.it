@@ -16,7 +16,6 @@ type Message struct {
 
 func (a *api) handleInfo() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		w.Header().Set("Content-Type", "application/json")
 		payload := Message{Text: "Moo"}
 		res, _ := json.Marshal(payload)
 		w.Write(res)

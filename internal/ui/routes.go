@@ -6,7 +6,7 @@ import (
 	"github.com/brettmostert/thredl.it/internal/ui/components"
 )
 
-// move handlers to own place...
+// TODO: Move handlers to own place i.e. handlers
 func (u *ui) routes() {
 	u.router.HandleFunc("/", u.handleInfo())
 	u.router.Use(u.sessionManager.LoadAndSave)
@@ -17,7 +17,6 @@ func (u *ui) routes() {
 
 func (u *ui) handleInfo() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		//
 		if r.Method == http.MethodPost {
 			u.postHandler(w, r)
 			return

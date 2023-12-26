@@ -3,7 +3,7 @@ package api
 import (
 	"net/http"
 
-	"github.com/brettmostert/thredl.it/server"
+	"github.com/brettmostert/thredl.it/internal/server"
 	"github.com/gorilla/mux"
 )
 
