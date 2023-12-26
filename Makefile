@@ -2,8 +2,11 @@ THIS_FILE := $(lastword $(MAKEFILE_LIST))
 THIS_DIR := $(dir $(realpath $(firstword $(MAKEFILE_LIST))))
 
 .PHONY: build
-build:
+build: gen
 	@sh -c "'$(THIS_DIR)/scripts/build.sh'"
+
+gen:
+	@sh -c "'$(THIS_DIR)/scripts/gen.sh'"
 
 dev: build
 	@sh -c "'$(THIS_DIR)/scripts/dev.sh'"

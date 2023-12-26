@@ -30,7 +30,7 @@ function build_date() {
 }
 
 BUILD_DATE=$(build_date)
-templ generate
+
 cp -r ./public ./bin/
 go build \
     -trimpath \
