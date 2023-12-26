@@ -3,51 +3,30 @@ package main
 import (
 	"fmt"
 	"net/http"
-	"sync"
 	"time"
 
+	"github.com/brettmostert/thredl.it/internal/api"
+	"github.com/brettmostert/thredl.it/internal/ui"
 	"github.com/brettmostert/thredl.it/server"
-	"github.com/brettmostert/thredl.it/server/api"
-	"github.com/brettmostert/thredl.it/server/ui"
 )
 
 func main() {
 	// todo - move this to internal/cmd to keep this clean...
 	ctx := &server.AppContext{}
-	api := api.New(ctx)
+	s := server.New(ctx)
 
-	apiServer := http.Server{
+	api.New(ctx, s.NewSubRoute("/api/v1"))
+	ui.New(ctx, s.NewSubRoute(""))
+
+	http := http.Server{
 		Addr:         "127.0.0.1:3000",
-		Handler:      api,
+		Handler:      s,
 		ReadTimeout:  5 * time.Second,
 		WriteTimeout: 10 * time.Second,
 		IdleTimeout:  15 * time.Second,
 	}
 
-	ui := ui.New(ctx)
-	uiServer := http.Server{
-		Addr:         "127.0.0.1:3001",
-		Handler:      ui,
-		ReadTimeout:  5 * time.Second,
-		WriteTimeout: 10 * time.Second,
-		IdleTimeout:  15 * time.Second,
-	}
-
-	wg := sync.WaitGroup{}
-
-	wg.Add(2)
-
-	go func() {
-		defer wg.Done()
-		apiServer.ListenAndServe()
-	}()
-
-	go func() {
-		defer wg.Done()
-		uiServer.ListenAndServe()
-	}()
-
-	wg.Wait()
+	http.ListenAndServe()
 
 	fmt.Println("service has shut down")
 }

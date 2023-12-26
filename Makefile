@@ -5,6 +5,9 @@ THIS_DIR := $(dir $(realpath $(firstword $(MAKEFILE_LIST))))
 build:
 	@sh -c "'$(THIS_DIR)/scripts/build.sh'"
 
+dev: build
+	@sh -c "'$(THIS_DIR)/scripts/dev.sh'"
+
 .PHONY: local
 local:
 	@echo $(THIS_DIR)

@@ -12,17 +12,16 @@ type api struct {
 	router *mux.Router
 }
 
-func New(ctx *server.AppContext) *api {
+func New(ctx *server.AppContext, r *mux.Router) *api {
 	s := &api{
 		ctx:    ctx,
-		router: mux.NewRouter(),
+		router: r,
 	}
-
 	s.routes()
-
 	return s
 }
 
 func (a *api) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	print("api.serveHttp\n")
 	a.router.ServeHTTP(w, r)
 }

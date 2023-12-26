@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 # Get the parent directory of where this script is.
+
+echo Starting build...
+
 SOURCE="${BASH_SOURCE[0]}"
 while [ -h "$SOURCE" ] ; do SOURCE="$(readlink "$SOURCE")"; done
 DIR="$( cd -P "$( dirname "$SOURCE" )/.." && pwd )"
@@ -27,7 +30,8 @@ function build_date() {
 }
 
 BUILD_DATE=$(build_date)
-
+templ generate
+cp -r ./public ./bin/
 go build \
     -trimpath \
     -ldflags "
@@ -37,3 +41,5 @@ go build \
       " \
     -o "$BIN_PATH" \
     ./cmd/thredl.it
+
+echo "Build completed SUCCESSFULLY"
