@@ -13,14 +13,14 @@ import (
 func main() {
 	// TODO: Move this to internal/cmd to keep this clean...
 	ctx := &server.AppContext{}
-	s := server.New(ctx)
+	server := server.New(ctx)
 
-	api.New(ctx, s.NewSubRoute("/api/v1"))
-	ui.New(ctx, s.NewSubRoute(""))
+	api.New(ctx, server.Router())
+	ui.New(ctx, server.Router())
 
 	http := http.Server{
 		Addr:         "127.0.0.1:3000",
-		Handler:      s,
+		Handler:      server,
 		ReadTimeout:  5 * time.Second,
 		WriteTimeout: 10 * time.Second,
 		IdleTimeout:  15 * time.Second,

@@ -7,3 +7,5 @@ Run the following command to have all of the following tools installed.
 ```
 
 ```
+
+<!-- TODO: Checkout go blueprint + cli tool from Melkey -->

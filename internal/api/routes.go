@@ -5,9 +5,10 @@ import (
 	"net/http"
 )
 
+const baseUrl = "/api/v1"
+
 func (a *api) routes() {
-	a.router.HandleFunc("/info", a.handleInfo())
-	a.router.Use(contentTypeApplicationJsonMiddleware)
+	a.router.HandleFunc(baseUrl+"/info", contentTypeApplicationJsonMiddleware(a.handleInfo()))
 }
 
 type Message struct {

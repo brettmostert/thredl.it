@@ -2,28 +2,27 @@ package server
 
 import (
 	"net/http"
-
-	"github.com/gorilla/mux"
 )
 
 type AppContext struct{}
 
 type server struct {
 	ctx    *AppContext
-	router *mux.Router
+	router *http.ServeMux
 }
 
 func New(ctx *AppContext) *server {
 	s := &server{
 		ctx:    ctx,
-		router: mux.NewRouter(),
+		router: http.NewServeMux(),
 	}
 
 	return s
 }
 
-func (s *server) NewSubRoute(r string) *mux.Router {
-	return s.router.PathPrefix(r).Subrouter()
+func (s *server) Router() *http.ServeMux {
+	// TODO: Check for duplicate routes?
+	return s.router
 }
 
 func (s *server) ServeHTTP(w http.ResponseWriter, r *http.Request) {

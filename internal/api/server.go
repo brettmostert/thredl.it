@@ -4,15 +4,14 @@ import (
 	"net/http"
 
 	"github.com/brettmostert/thredl.it/internal/server"
-	"github.com/gorilla/mux"
 )
 
 type api struct {
 	ctx    *server.AppContext
-	router *mux.Router
+	router *http.ServeMux
 }
 
-func New(ctx *server.AppContext, r *mux.Router) *api {
+func New(ctx *server.AppContext, r *http.ServeMux) *api {
 	s := &api{
 		ctx:    ctx,
 		router: r,

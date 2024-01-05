@@ -1,11 +1,11 @@
 package ui
 
 import (
+	"net/http"
 	"time"
 
 	"github.com/alexedwards/scs/v2"
 	"github.com/brettmostert/thredl.it/internal/server"
-	"github.com/gorilla/mux"
 )
 
 type GlobalState struct {
@@ -14,12 +14,12 @@ type GlobalState struct {
 
 type ui struct {
 	ctx            *server.AppContext
-	router         *mux.Router
+	router         *http.ServeMux
 	state          *GlobalState
 	sessionManager *scs.SessionManager
 }
 
-func New(ctx *server.AppContext, r *mux.Router) *ui {
+func New(ctx *server.AppContext, r *http.ServeMux) *ui {
 	s := &ui{
 		ctx:            ctx,
 		router:         r,

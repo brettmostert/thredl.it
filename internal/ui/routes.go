@@ -8,11 +8,8 @@ import (
 
 // TODO: Move handlers to own place i.e. handlers
 func (u *ui) routes() {
-	u.router.HandleFunc("/", u.handleInfo())
-	u.router.Use(u.sessionManager.LoadAndSave)
-
-	// serve static assets
-	u.router.PathPrefix("/assets/").Handler(http.StripPrefix("/assets/", http.FileServer(http.Dir("public/assets"))))
+	u.router.Handle("/assets/", http.StripPrefix("/assets/", http.FileServer(http.Dir("public/assets"))))
+	u.router.Handle("/", u.sessionManager.LoadAndSave(u.handleInfo()))
 }
 
 func (u *ui) handleInfo() http.HandlerFunc {
