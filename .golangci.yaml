@@ -18,10 +18,4 @@ linters:
     - nolintlint
     - paralleltest
     - revive
-
-    # - gofmt
-    # - goimports
-    # - nolintlint
-    # - paralleltest
-    # - revive
-    # - staticcheck
+    - gosec
