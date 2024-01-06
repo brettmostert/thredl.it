@@ -3,6 +3,17 @@
 
 echo Starting build...
 
+# set defaults for flags
+project="thredl.it"
+
+# while getopts u:p:dbs: flag
+while getopts p: flag
+do
+    case "${flag}" in
+        p) project=${OPTARG};;
+    esac
+done
+
 SOURCE="${BASH_SOURCE[0]}"
 while [ -h "$SOURCE" ] ; do SOURCE="$(readlink "$SOURCE")"; done
 DIR="$( cd -P "$( dirname "$SOURCE" )/.." && pwd )"
@@ -15,8 +26,9 @@ if [ ! -d $DIR/bin ]; then
 fi
 
 BASE_PRODUCT_VERSION=0.1
-
-BINARY_NAME="thredl.it"
+PROJECT_NAME=${project:="thredl.it"}
+echo $PROJECT_NAME
+BINARY_NAME=${PROJECT_NAME}
 BIN_PATH=${BIN_PATH:=bin/${BINARY_NAME}}
 
 # Get the git commit
@@ -40,6 +52,6 @@ go build \
       -X 'github.com/brettmostert/thredl.it/version.BuildDate=$BUILD_DATE'
       " \
     -o "$BIN_PATH" \
-    ./cmd/thredl.it
+    ./cmd/${project}
 
 echo "Build completed SUCCESSFULLY"
