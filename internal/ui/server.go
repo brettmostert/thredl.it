@@ -19,16 +19,18 @@ type ui struct {
 	sessionManager *scs.SessionManager
 }
 
+const sessionLifeTime = 2
+
 func New(ctx *server.AppContext, r *http.ServeMux) *ui {
 	s := &ui{
 		ctx:            ctx,
-		router:         r,
 		state:          &GlobalState{},
 		sessionManager: scs.New(),
+		router:         r,
 	}
 
 	// Todo - Add to config
-	s.sessionManager.Lifetime = 2 * time.Minute
+	s.sessionManager.Lifetime = sessionLifeTime * time.Minute
 	s.routes()
 	return s
 }
