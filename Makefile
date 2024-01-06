@@ -8,6 +8,9 @@ build: clean gen
 build-api:
 	@sh -c "'$(THIS_DIR)/scripts/build.sh' -p thredl.it-api"
 
+lint:
+	@sh -c "'$(THIS_DIR)/scripts/lint.sh'"
+
 clean:
 	rm -rf ./bin
 
