@@ -6,7 +6,7 @@ import (
 	"github.com/brettmostert/thredl.it/internal/ui/components"
 )
 
-func (u *ui) handleInfo() http.HandlerFunc {
+func (u *UI) handleInfo() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		if r.Method == http.MethodPost {
 			u.postHandler(w, r)
@@ -16,24 +16,27 @@ func (u *ui) handleInfo() http.HandlerFunc {
 	}
 }
 
-func (u *ui) getHandler(w http.ResponseWriter, r *http.Request) {
+func (u *UI) getHandler(w http.ResponseWriter, r *http.Request) {
 	userCount := u.sessionManager.GetInt(r.Context(), "count")
 	component := components.Page(u.state.Count, userCount)
 	component.Render(r.Context(), w)
 }
 
-func (u *ui) getPartial(w http.ResponseWriter, r *http.Request) {
+func (u *UI) getPartial(w http.ResponseWriter, r *http.Request) {
 	userCount := u.sessionManager.GetInt(r.Context(), "count")
 	component := components.Counts(u.state.Count, userCount)
 	component.Render(r.Context(), w)
 }
 
-func (u *ui) postHandler(w http.ResponseWriter, r *http.Request) {
-	// Update state.
+func (u *UI) postHandler(w http.ResponseWriter, r *http.Request) {
 	r.ParseForm()
-
+	if r.Form == nil {
+		// TODO: Implement nicer error handling
+		panic("This should not be nil")
+	}
 	// Check to see if the global button was pressed.
 	if r.Form.Has("global") {
+		print("global")
 		u.state.Count++
 	}
 	if r.Form.Has("session") {

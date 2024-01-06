@@ -1,7 +1,7 @@
 package api
 
-const baseUrl = "/api/v1"
+const baseURL = "/api/v1"
 
-func (a *api) routes() {
-	a.router.HandleFunc(baseUrl+"/info", contentTypeApplicationJsonMiddleware(a.handleInfo()))
+func (a *API) routes() {
+	a.router.HandleFunc(baseURL+"/info", contentTypeApplicationJSONMiddleware(a.handleInfo()))
 }

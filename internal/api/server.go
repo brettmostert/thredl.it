@@ -6,13 +6,13 @@ import (
 	"github.com/brettmostert/thredl.it/internal/server"
 )
 
-type api struct {
+type API struct {
 	ctx    *server.AppContext
 	router *http.ServeMux
 }
 
-func New(ctx *server.AppContext, r *http.ServeMux) *api {
-	s := &api{
+func New(ctx *server.AppContext, r *http.ServeMux) *API {
+	s := &API{
 		ctx:    ctx,
 		router: r,
 	}
@@ -20,7 +20,7 @@ func New(ctx *server.AppContext, r *http.ServeMux) *api {
 	return s
 }
 
-func (a *api) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+func (a *API) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	print("api.serveHttp\n")
 	a.router.ServeHTTP(w, r)
 }

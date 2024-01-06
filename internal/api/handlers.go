@@ -9,7 +9,7 @@ type Message struct {
 	Text string
 }
 
-func (a *api) handleInfo() http.HandlerFunc {
+func (a *API) handleInfo() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		payload := Message{Text: "Moo"}
 		res, _ := json.Marshal(payload)

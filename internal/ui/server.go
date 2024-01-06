@@ -12,7 +12,7 @@ type GlobalState struct {
 	Count int
 }
 
-type ui struct {
+type UI struct {
 	ctx            *server.AppContext
 	router         *http.ServeMux
 	state          *GlobalState
@@ -21,12 +21,12 @@ type ui struct {
 
 const sessionLifeTime = 2
 
-func New(ctx *server.AppContext, r *http.ServeMux) *ui {
-	s := &ui{
+func New(ctx *server.AppContext, r *http.ServeMux) *UI {
+	s := &UI{
 		ctx:            ctx,
+		router:         r,
 		state:          &GlobalState{},
 		sessionManager: scs.New(),
-		router:         r,
 	}
 
 	// Todo - Add to config
