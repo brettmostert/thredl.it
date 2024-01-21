@@ -13,6 +13,10 @@ func (a *API) handleInfo() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		payload := Message{Text: "Moo"}
 		res, _ := json.Marshal(payload)
-		w.Write(res)
+		_, err := w.Write(res)
+		if err != nil {
+			// TODO: Implement nicer error handling
+			panic("oh no")
+		}
 	}
 }

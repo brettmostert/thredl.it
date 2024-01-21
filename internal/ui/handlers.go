@@ -19,17 +19,30 @@ func (u *UI) handleInfo() http.HandlerFunc {
 func (u *UI) getHandler(w http.ResponseWriter, r *http.Request) {
 	userCount := u.sessionManager.GetInt(r.Context(), "count")
 	component := components.Page(u.state.Count, userCount)
-	component.Render(r.Context(), w)
+	err := component.Render(r.Context(), w)
+	if err != nil {
+		// TODO: Implement nicer error handling
+		panic("component.render error")
+	}
 }
 
 func (u *UI) getPartial(w http.ResponseWriter, r *http.Request) {
 	userCount := u.sessionManager.GetInt(r.Context(), "count")
 	component := components.Counts(u.state.Count, userCount)
-	component.Render(r.Context(), w)
+	err := component.Render(r.Context(), w)
+	if err != nil {
+		// TODO: Implement nicer error handling
+		panic("component.render error")
+	}
 }
 
 func (u *UI) postHandler(w http.ResponseWriter, r *http.Request) {
-	r.ParseForm()
+	err := r.ParseForm()
+	if err != nil {
+		// TODO: Implement nicer error handling
+		panic("oh no")
+	}
+
 	if r.Form == nil {
 		// TODO: Implement nicer error handling
 		panic("This should not be nil")

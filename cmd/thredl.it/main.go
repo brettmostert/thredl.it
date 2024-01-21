@@ -25,7 +25,11 @@ func main() {
 		IdleTimeout:  15 * time.Second,
 	}
 
-	http.ListenAndServe()
+	err := http.ListenAndServe()
+	if err != nil {
+		// TODO: Implement nicer error handling
+		panic("oh no")
+	}
 
 	fmt.Println("service has shut down")
 }
