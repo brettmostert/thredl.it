@@ -131,5 +131,3 @@ A Big Shout Out! To the people who worked on the following, the work you have do
 | done    | :heavy_check_mark: | `:heavy_check_mark:` |
 | wip     | :construction:     | `:construction:`     |
 | note    | :memo:             | `:memo:`             |
-
-<!-- TODO: Checkout go blueprint + cli tool from Melkey -->

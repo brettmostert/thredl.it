@@ -10,7 +10,6 @@ import (
 )
 
 func main() {
-	// TODO: Move this to internal/cmd to keep this clean...
 	ctx := &server.AppContext{}
 	router := http.NewServeMux()
 	ui.New(ctx, router)
