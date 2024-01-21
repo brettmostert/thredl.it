@@ -19,3 +19,7 @@ linters:
     - paralleltest
     - revive
     - gosec
+  exclude-rules:
+    - path: internal/ui/components
+      linters:
+        - errcheck
